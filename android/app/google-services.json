@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "900568651789",
+    "project_id": "authpractice-65885",
+    "storage_bucket": "authpractice-65885.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:900568651789:android:22ccee8d581ee4d2035d44",
+        "android_client_info": {
+          "package_name": "com.greendee.practice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3vzabGptB27sI_V1Wwc4bHC6BfOrMEkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:900568651789:android:53878fc4383be8b0035d44",
+        "android_client_info": {
+          "package_name": "com.greendee.practiceapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3vzabGptB27sI_V1Wwc4bHC6BfOrMEkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
