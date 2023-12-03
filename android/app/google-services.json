@@ -12,7 +12,20 @@
           "package_name": "com.greendee.practice"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "900568651789-lpngit4r5u7ijr5i19bmmrhe6ljrdac1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.greendee.practice",
+            "certificate_hash": "d6cde288d581400c4540d8b6db348eeb1f4d2d42"
+          }
+        },
+        {
+          "client_id": "900568651789-kej7cumts9fpf4cdrbsh4r9ev7kts276.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB3vzabGptB27sI_V1Wwc4bHC6BfOrMEkk"
@@ -20,7 +33,20 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "900568651789-kej7cumts9fpf4cdrbsh4r9ev7kts276.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "900568651789-8bigfi1koh9qc1ifetatfk3ggn4h458m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.green.practiceapp",
+                "app_store_id": "152003034"
+              }
+            }
+          ]
         }
       }
     },
@@ -31,7 +57,12 @@
           "package_name": "com.greendee.practiceapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "900568651789-kej7cumts9fpf4cdrbsh4r9ev7kts276.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB3vzabGptB27sI_V1Wwc4bHC6BfOrMEkk"
@@ -39,7 +70,20 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "900568651789-kej7cumts9fpf4cdrbsh4r9ev7kts276.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "900568651789-8bigfi1koh9qc1ifetatfk3ggn4h458m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.green.practiceapp",
+                "app_store_id": "152003034"
+              }
+            }
+          ]
         }
       }
     }

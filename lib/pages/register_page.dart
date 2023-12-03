@@ -1,33 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:practice/components/my_button.dart';
 import 'package:practice/components/my_textfield.dart';
 import 'package:practice/components/square_tile.dart';
-import 'package:practice/googleapi/auth_service.dart';
 
-//https://www.youtube.com/watch?v=4fucdtPwTWI&t=40s&ab_channel=MitchKoko
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  LoginPage({super.key, required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<RegisterPage> {
   //text editing controllers
+  final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   //Signin user in method
-  void signUserIn() async {
-    //loading effect
-    showDialog(context: context, builder: (context) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    },
+  void signUpUser() async {
+    // loading effect
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
 
     final emailPattern = RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
@@ -37,18 +40,36 @@ class _LoginPageState extends State<LoginPage> {
       print('Invalid email format');
     } else {
       try {
-        await FirebaseAuth.instance
-            .signInWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text,
-        );
-        Navigator.pop(context);
+        if (passwordController.text == confirmPasswordController.text) {
+          // Use 'UserCredential' to capture the result of 'createUserWithEmailAndPassword'
+          UserCredential userCredential = await FirebaseAuth.instance
+              .createUserWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordController.text,
+          );
+
+          // Pass 'userCredential' to the 'createUserDocument' function
+          await createUserDocument(userCredential);
+        } else {
+          showErrorMessage("Password doesn't match");
+        }
+        if(context.mounted)Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
         Navigator.pop(context);
         showErrorMessage(e.code);
       }
     }
   }
+
+  Future<void> createUserDocument(UserCredential userCredential) async {
+    if (userCredential != null && userCredential.user != null) {
+      await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.email).set({
+        'email': userCredential.user!.email,
+        'username': usernameController.text,
+      });
+    }
+  }
+
 
   void showErrorMessage(String message) {
     showDialog(
@@ -78,13 +99,13 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               const SizedBox(height: 40),
               //logo
-              const Icon(Icons.key,
+              const Icon(Icons.key_off,
                   color: Colors.pink,
                   size: 100),
 
               const SizedBox(height: 30),
               //welcome back, you've been missed
-              const Text('Welcome, you can login right now!',
+              const Text('You can create an account',
                 style: TextStyle(
                   color: Colors.pinkAccent,
                   fontSize: 16,
@@ -92,7 +113,13 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               const SizedBox(height: 30),
-              //email textfield
+
+              MyTextField(
+                controller: usernameController,
+                hintText: 'Username',
+                obscureText: false,
+              ),
+              const SizedBox(height: 10),
               MyTextField(
                 controller: emailController,
                 hintText: 'Email',
@@ -108,23 +135,18 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               const SizedBox(height: 10),
-              //forgot password?
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text('Forgot password?',
-                        style: TextStyle(color: Colors.grey[600])),
-                  ],
-                ),
+              //password textfield
+              MyTextField(
+                controller: confirmPasswordController,
+                hintText: 'Confirm Password',
+                obscureText: true,
               ),
 
               const SizedBox(height: 25),
               //sign in button
               MyButton(
-                text: "Login",
-                onTap: signUserIn,
+                text: "Register",
+                onTap: signUpUser,
               ),
 
               const SizedBox(height: 40),
@@ -160,29 +182,16 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               const SizedBox(height: 40),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-
-                  SquareTile(
-                    onTap: () => signInWithGoogle(),
-                      imagePath: 'lib/images/google.png'),
-
-                ],
-              ),
-
-              const SizedBox(height: 40),
               //google + apple sign in buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Not a member?',
+                  Text('Already have an account?',
                       style: TextStyle(color: Colors.grey[700])),
                   const SizedBox(width: 4),
                   GestureDetector(
                     onTap: widget.onTap,
-                    child: const Text('Register now',
+                    child: const Text('Login now',
                       style: TextStyle(
                           color: Colors.pinkAccent,
                           fontWeight: FontWeight.bold
