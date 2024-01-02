@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             alignment: Alignment.center,
             child: const Text(
-              "Welcome to this page!",
+              "Welcome to Marites Tambayan!",
               style: TextStyle(fontSize: 30,
                 fontWeight: FontWeight.bold,
                 color: Colors.pinkAccent

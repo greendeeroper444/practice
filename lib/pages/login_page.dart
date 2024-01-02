@@ -6,7 +6,6 @@ import 'package:practice/components/my_textfield.dart';
 import 'package:practice/components/square_tile.dart';
 import 'package:practice/googleapi/auth_service.dart';
 
-//https://www.youtube.com/watch?v=4fucdtPwTWI&t=40s&ab_channel=MitchKoko
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
   LoginPage({super.key, required this.onTap});
